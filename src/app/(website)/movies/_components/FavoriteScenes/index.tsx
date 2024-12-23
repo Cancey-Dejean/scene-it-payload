@@ -28,7 +28,6 @@ export default function FavoriteScenes({ scenes }: { scenes: Scene[] }) {
                   className="flex flex-col gap-2 rounded-3xl bg-zinc-900 p-8"
                 >
                   <div className="relative h-[217px] w-full overflow-hidden rounded-2xl">
-                    Image
                     <Image
                       src={scene.sceneImage?.url || ''}
                       alt={scene.sceneImage?.alt || ''}
