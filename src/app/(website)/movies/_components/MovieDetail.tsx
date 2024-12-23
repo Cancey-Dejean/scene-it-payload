@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Clock, Star, Calendar, Film } from 'lucide-react'
 import { imageBaseUrl } from '@/constants'
 import Container from '@/components/ui/container'
-import { Movie, SimpleImage } from '@/types'
+import { Movie } from '@/types'
 
 type MovieDetailProps = {
   movie: Movie

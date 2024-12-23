@@ -4,7 +4,6 @@ import { imageBaseUrl } from '@/constants'
 import { SearchResult } from '@/types'
 import { CopyIcon, Film, Tv } from 'lucide-react'
 import Image from 'next/image'
-import { Suspense } from 'react'
 import { toast } from 'sonner'
 
 interface SearchResultsProps {

@@ -8,8 +8,6 @@ export default async function HeroBanner({ movie }: { movie: Movie[] }) {
   const randomIndex = Math.floor(Math.random() * movie.length)
   const recentlyAddedMovie = movie[randomIndex]
 
-  // console.log(movie);
-
   return (
     <section className="relative h-[400px] w-full">
       <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/40" />

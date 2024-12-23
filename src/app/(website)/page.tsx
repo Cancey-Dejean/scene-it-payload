@@ -15,7 +15,6 @@ export default async function Page() {
   const randomIndex = Math.floor(Math.random() * topRatedMovies.results.length)
   const topRatedMovie = topRatedMovies.results[randomIndex]
 
-  console.log(topRatedMovie)
   return (
     <>
       <Suspense>

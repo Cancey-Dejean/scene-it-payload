@@ -1,6 +1,6 @@
 'use client'
 
-import { Movie, Scene } from '@/types'
+import { Scene } from '@/types'
 import Image from 'next/image'
 import { BackgroundGradient } from '@/components/ui/background-gradient'
 import Container from '@/components/ui/container'
@@ -14,7 +14,6 @@ export default function FavoriteScenes({ scenes }: { scenes: Scene[] }) {
     setLoadMore(loadMore + scenesShown)
   }
 
-  console.log(scenes)
   return (
     <section className="py-20">
       <Container>

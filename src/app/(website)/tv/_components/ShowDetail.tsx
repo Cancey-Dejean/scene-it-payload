@@ -37,16 +37,17 @@ export function ShowDetail({ show }: ShowDetailProps) {
       <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/40" />
 
       <div className="absolute inset-0 z-[1]">
-        {show.banner_alt ? (
-          <Image
-            src={`${process.env.NEXT_PUBLIC_ASSETS_URL}${show.banner_alt?.filename_disk}`}
-            alt={title}
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
-          />
+        {show.bannerAlt ? (
+          <div>Banner Alternative for TV</div>
         ) : (
+          // <Image
+          //   src={`${process.env.NEXT_PUBLIC_ASSETS_URL}${show.banner_alt?.filename_disk}`}
+          //   alt={title}
+          //   fill
+          //   priority
+          //   className="object-cover"
+          //   sizes="100vw"
+          // />
           <Image
             src={`${imageBaseUrl}${show.backdrop_path}`}
             alt={title}

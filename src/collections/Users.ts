@@ -1,5 +1,4 @@
 import { isAdmin, isAdminFieldLevel } from '@/lib/access/isAdmin'
-import { isAdminOrEditor } from '@/lib/access/isAdminOrEditor'
 import { isAdminOrSelf } from '@/lib/access/isAdminOrSelf'
 import type { CollectionConfig } from 'payload'
 

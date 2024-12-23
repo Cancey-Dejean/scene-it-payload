@@ -1,6 +1,3 @@
-// import { fetchTvShowsByIds } from "@/actions/tmdb";
-
-import { Suspense } from 'react'
 import { fetchTvShowsByIds } from '@/app/actions/tmdb'
 import HeroBannerTv from '@/components/Heroes/HeroBannerTv'
 import { fetchTvShows } from '@/lib/queries'

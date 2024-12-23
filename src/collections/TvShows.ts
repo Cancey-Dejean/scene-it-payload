@@ -1,4 +1,3 @@
-import { anyone } from '@/lib/access/anyone'
 import { isAdminFieldLevel } from '@/lib/access/isAdmin'
 
 import type { CollectionConfig } from 'payload'

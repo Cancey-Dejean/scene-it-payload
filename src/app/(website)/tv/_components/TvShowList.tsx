@@ -1,21 +1,20 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import { TvShow } from "@/types";
-import { useState } from "react";
-import { Button } from "@/components/ui/Button";
-import { movieYearFormat } from "@/utils/movieYearFormat";
-import { imageBaseUrl } from "@/constants";
-import Link from "next/link";
+import Image from 'next/image'
+import { TvShow } from '@/types'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { movieYearFormat } from '@/utils/movieYearFormat'
+import { imageBaseUrl } from '@/constants'
+import Link from 'next/link'
 
 export default function TvShowList({ tvShows }: { tvShows: TvShow[] }) {
-  const showsShown = 14;
-  const [loadMore, setLoadMore] = useState(showsShown);
+  const showsShown = 14
+  const [loadMore, setLoadMore] = useState(showsShown)
   const showMoreShows = () => {
-    setLoadMore(loadMore + showsShown);
-  };
+    setLoadMore(loadMore + showsShown)
+  }
 
-  // console.log(tvShows);
   return (
     <div>
       {tvShows && tvShows?.length > 0 ? (
@@ -25,25 +24,18 @@ export default function TvShowList({ tvShows }: { tvShows: TvShow[] }) {
               <div className="group relative">
                 <Image
                   src={`${imageBaseUrl}${tvShow.poster_path}`}
-                  alt={tvShow.name ?? tvShow.original_name ?? ""}
+                  alt={tvShow.name ?? tvShow.original_name ?? ''}
                   width={180}
                   height={273}
                   className="mb-2 rounded-lg border border-white/10 transition-all duration-300 group-hover:scale-105"
                 />
                 <div className="relative">
-                  <p className="flex items-center gap-1 font-semibold">
-                    {tvShow.name}
-                  </p>
+                  <p className="flex items-center gap-1 font-semibold">{tvShow.name}</p>
                 </div>
 
-                <p className="text-gray-400">
-                  {movieYearFormat(tvShow.first_air_date ?? "")}
-                </p>
+                <p className="text-gray-400">{movieYearFormat(tvShow.first_air_date ?? '')}</p>
 
-                <Link
-                  href={`/tv/${tvShow.id}`}
-                  className="after:absolute after:inset-0"
-                />
+                <Link href={`/tv/${tvShow.id}`} className="after:absolute after:inset-0" />
               </div>
             </li>
           ))}
@@ -68,5 +60,5 @@ export default function TvShowList({ tvShows }: { tvShows: TvShow[] }) {
         </div>
       )}
     </div>
-  );
+  )
 }

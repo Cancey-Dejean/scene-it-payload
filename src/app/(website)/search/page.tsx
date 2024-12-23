@@ -56,8 +56,6 @@ export default async function SearchPage({ searchParams }: PageProps) {
   const totalResults = movieResults.length + showResults.length
   const combinedResults = [...movieResults, ...showResults]
 
-  // console.log(combinedResults);
-
   return (
     <section className="bg-black py-40">
       <Container>

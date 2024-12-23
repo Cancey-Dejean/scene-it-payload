@@ -1,13 +1,7 @@
-import { Movie } from "@/types";
-import { FocusCards } from "../../../../components/ui/focus-cards";
+import { FocusCards } from '@/components/ui/focus-cards'
+import { Movie } from '@/types'
 
-export default function FavoriteRow({
-  title,
-  movies,
-}: {
-  title: string;
-  movies: Movie[];
-}) {
+export default function FavoriteRow({ title, movies }: { title: string; movies: Movie[] }) {
   return (
     <div className="py-10">
       <h2 className="mb-10 text-4xl font-bold text-white">{title}</h2>
@@ -22,5 +16,5 @@ export default function FavoriteRow({
         <p className="text-white">No movies added yet.</p>
       )}
     </div>
-  );
+  )
 }
