@@ -43,25 +43,25 @@ export default async function MoviesPage({
         </div>
       </Suspense>
 
-      {/* <Suspense>
-        <section className="bg-black py-40">
-          <Container>
-            <MovieList movies={allMovies} />
+      <section className="bg-black py-40">
+        <Container>
+          <MovieList movies={allMovies} />
 
-            {movies.length === 0 && (
-              <p className="text-center text-lg text-gray-400">No movies found</p>
-            )}
+          {movies.docs.length === 0 && (
+            <p className="text-center text-lg text-gray-400">No movies found</p>
+          )}
 
+          {totalMovies.totalDocs > LIMIT && (
             <div className="mt-8">
               <PaginationComponent
                 limit={LIMIT}
                 currentPage={currentPage}
-                total={Number(totalMovies)}
+                total={Number(totalMovies.totalDocs)}
               />
             </div>
-          </Container>
-        </section>
-      </Suspense> */}
+          )}
+        </Container>
+      </section>
     </>
   )
 }

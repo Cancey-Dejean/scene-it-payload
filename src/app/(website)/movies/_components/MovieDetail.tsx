@@ -1,53 +1,52 @@
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { Clock, Star, Calendar, Film } from "lucide-react";
-import { imageBaseUrl } from "@/constants";
-import Container from "@/components/ui/container";
-import { Movie } from "@/types";
+import Image from 'next/image'
+import { Badge } from '@/components/ui/badge'
+import { Clock, Star, Calendar, Film } from 'lucide-react'
+import { imageBaseUrl } from '@/constants'
+import Container from '@/components/ui/container'
+import { Movie } from '@/types'
 
 type MovieDetailProps = {
-  movie: Movie;
+  movie: Movie
   details: {
-    backdrop_path: string;
+    backdrop_path: string
     belongs_to_collection: {
-      backdrop_path: string;
-      id: number;
-      name: string;
-      poster_path: string;
-    };
-    budget: number;
-    genres: Array<{ id: number; name: string }>;
-    homepage: string;
-    id: number;
-    original_title: string;
-    title?: string;
-    popularity: number;
-    poster_path: string;
-    overview: string;
-    name?: string;
-    first_air_date?: string;
-    vote_average: number;
-    vote_count: number;
-    release_date?: string;
-    runtime?: number;
-    tagline?: string;
-  };
-};
+      backdrop_path: string
+      id: number
+      name: string
+      poster_path: string
+    }
+    budget: number
+    genres: Array<{ id: number; name: string }>
+    homepage: string
+    id: number
+    original_title: string
+    title?: string
+    popularity: number
+    poster_path: string
+    overview: string
+    name?: string
+    first_air_date?: string
+    vote_average: number
+    vote_count: number
+    release_date?: string
+    runtime?: number
+    tagline?: string
+  }
+}
 
 export function MovieDetail({ details, movie }: MovieDetailProps) {
-  const title = movie.title || movie.original_title || "";
-  const releaseDate = details.release_date;
+  const title = movie.title || movie.original_title || ''
+  const releaseDate = details.release_date
   const formattedDate = releaseDate
-    ? new Date(releaseDate).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
+    ? new Date(releaseDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
       })
-    : "Release date unknown";
+    : 'Release date unknown'
 
   const duration =
-    details.runtime &&
-    `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`;
+    details.runtime && `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`
   // console.log(movie.has_seen_movie);
 
   return (
@@ -79,12 +78,8 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
       </div>
 
       <Container className="relative z-[2] flex h-full flex-col justify-end pb-10">
-        <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
-          {title}
-        </h1>
-        {details.tagline && (
-          <p className="mb-4 text-xl text-gray-300">{details.tagline}</p>
-        )}
+        <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">{title}</h1>
+        {details.tagline && <p className="mb-4 text-xl text-gray-300">{details.tagline}</p>}
 
         <div className="mb-6 flex flex-wrap gap-2">
           {details.genres.map((genre) => (
@@ -120,9 +115,7 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
         <div>
           {movie.has_seen_movie && (
             <div className="text-white">
-              <h3 className="mb-4 mt-6 text-lg font-bold text-green-500">
-                Seen by:
-              </h3>
+              <h3 className="mb-4 mt-6 text-lg font-bold text-green-500">Seen by:</h3>
               <div className="flex gap-4">
                 {movie.has_seen_movie.map((person: string) => (
                   <p
@@ -138,5 +131,5 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
         </div>
       </Container>
     </section>
-  );
+  )
 }

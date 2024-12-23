@@ -35,6 +35,13 @@ import config from '@payload-config'
 //   return posts.docs?.[0] || null;
 // });
 
+export async function fetchMovies() {
+  const payload = await getPayload({ config })
+  return await payload.find({
+    collection: 'movies',
+  })
+}
+
 export async function fetchMoviesForPagination({ limit, page }: { limit: string; page: string }) {
   const payload = await getPayload({ config })
 
