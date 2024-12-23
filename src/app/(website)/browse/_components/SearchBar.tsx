@@ -25,7 +25,7 @@ export default function SearchBar({ query, onQueryChange, onSearch, isLoading }:
           className="pl-9"
         />
       </div>
-      <Button onClick={onSearch} disabled={isLoading}>
+      <Button onClick={onSearch} disabled={isLoading} variant="secondary">
         {isLoading ? 'Searching...' : 'Search'}
       </Button>
     </div>
