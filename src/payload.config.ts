@@ -12,6 +12,7 @@ import { Media } from './collections/Media'
 import { Editors } from './collections/Editors'
 import { Movies } from './collections/Movies'
 import { Scenes } from './collections/Scenes'
+import { TvShows } from './collections/TvShows'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Editors, Movies, Scenes],
+  collections: [Users, Media, Editors, Movies, Scenes, TvShows],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

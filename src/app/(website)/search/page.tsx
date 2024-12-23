@@ -4,13 +4,14 @@ import Container from '@/components/ui/container'
 import { Input } from '@/components/ui/input'
 
 import { Search } from 'lucide-react'
-import { getMovies } from '@/lib/schemas/movies'
-import { getTvShows } from '@/lib/schemas/shows'
+
+// import { getTvShows } from '@/lib/schemas/shows'
 import { imageBaseUrl } from '@/constants'
 
 import { fetchMoviesByIds, fetchTvShowsByIds } from '@/app/actions/tmdb'
 import ItemCard from '@/components/Cards/ItemCard'
 import { Button } from '@/components/ui/button'
+import { fetchMovies, fetchTvShows } from '@/lib/queries'
 
 interface PageProps {
   searchParams: Promise<{ query?: string }>
@@ -18,11 +19,11 @@ interface PageProps {
 
 export default async function SearchPage({ searchParams }: PageProps) {
   const { query } = await searchParams
-  const [movies, shows] = await Promise.all([getMovies(), getTvShows()])
+  const [movies, shows] = await Promise.all([fetchMovies(), fetchTvShows()])
 
   // Filter movies based on search query
   const filteredMovies = query
-    ? movies.filter((movie) => {
+    ? movies.docs.filter((movie) => {
         const movieTitle = movie.title?.toLowerCase() || ''
         const searchQuery = query.toLowerCase()
         return movieTitle.includes(searchQuery)
@@ -31,7 +32,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
 
   // Filter shows based on search query
   const filteredShows = query
-    ? shows.filter((show) => {
+    ? shows.docs.filter((show) => {
         const showTitle = show.title?.toLowerCase() || ''
         const searchQuery = query.toLowerCase()
         return showTitle.includes(searchQuery)

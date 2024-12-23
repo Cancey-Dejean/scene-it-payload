@@ -42,6 +42,13 @@ export async function fetchMovies() {
   })
 }
 
+export async function fetchTvShows() {
+  const payload = await getPayload({ config })
+  return await payload.find({
+    collection: 'tvShows',
+  })
+}
+
 export async function fetchMoviesForPagination({ limit, page }: { limit: string; page: string }) {
   const payload = await getPayload({ config })
 
