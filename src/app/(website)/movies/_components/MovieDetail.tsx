@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge'
 import { Clock, Star, Calendar, Film } from 'lucide-react'
 import { imageBaseUrl } from '@/constants'
 import Container from '@/components/ui/container'
-import { Movie } from '@/types'
+import { Movie, SimpleImage } from '@/types'
 
 type MovieDetailProps = {
   movie: Movie
@@ -47,17 +47,16 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
 
   const duration =
     details.runtime && `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`
-  // console.log(movie.has_seen_movie);
 
   return (
     <section className="relative h-[600px] w-full">
       <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/40" />
 
       <div className="absolute inset-0 z-[1]">
-        {movie.banner_alt ? (
+        {movie.bannerAlt ? (
           <Image
-            src={`${process.env.NEXT_PUBLIC_ASSETS_URL}${movie.banner_alt?.filename_disk}`}
-            alt={title}
+            src={movie.bannerAlt.url}
+            alt={movie.bannerAlt.alt}
             fill
             priority
             className="object-cover"
@@ -83,7 +82,7 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
 
         <div className="mb-6 flex flex-wrap gap-2">
           {details.genres.map((genre) => (
-            <Badge key={genre.id} variant="secondary">
+            <Badge key={genre.id} variant="default">
               {genre.name}
             </Badge>
           ))}

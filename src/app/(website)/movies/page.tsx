@@ -32,8 +32,6 @@ export default async function MoviesPage({
     movies.docs.map((movie: { movieId?: string | null }) => String(movie.movieId)),
   )
 
-  console.log(totalMovies.totalDocs)
-
   return (
     <>
       <Suspense>

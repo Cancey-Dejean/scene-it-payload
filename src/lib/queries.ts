@@ -39,6 +39,15 @@ export async function fetchMovies() {
   const payload = await getPayload({ config })
   return await payload.find({
     collection: 'movies',
+    depth: 2,
+  })
+}
+
+export async function fetchScenes() {
+  const payload = await getPayload({ config })
+  return await payload.find({
+    collection: 'scenes',
+    depth: 2,
   })
 }
 

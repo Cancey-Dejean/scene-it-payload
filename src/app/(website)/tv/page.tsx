@@ -14,25 +14,22 @@ export default async function TV() {
     tvShows.docs.map((tvShow: { showId?: string | null }) => String(tvShow.showId)),
   )
 
-  console.log(allShows)
-
   return (
     <>
-      <Suspense>
-        <HeroBannerTv tv={allShows} />
-      </Suspense>
+      <HeroBannerTv tv={allShows} />
+      <div className="mt-4 text-center text-lg text-white">
+        Total: (<strong>{tvShows.totalDocs}</strong>)
+      </div>
 
-      <Suspense>
-        <section className="bg-black py-40">
-          <Container>
-            <TvShowList tvShows={allShows} />
+      <section className="bg-black py-40">
+        <Container>
+          <TvShowList tvShows={allShows} />
 
-            {tvShows.totalDocs === 0 && (
-              <p className="text-center text-lg text-gray-400">No movies found</p>
-            )}
-          </Container>
-        </section>
-      </Suspense>
+          {tvShows.totalDocs === 0 && (
+            <p className="text-center text-lg text-gray-400">No movies found</p>
+          )}
+        </Container>
+      </section>
     </>
   )
 }
