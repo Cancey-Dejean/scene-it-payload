@@ -2,7 +2,7 @@
 
 @theme {
   --font-*: initial;
-  --color-*: initial;
+  /* --color-*: initial; */
 
   --font-inter: 'Inter', sans-serif;
   --font-monoton: 'Monoton', sans-serif;
@@ -12,33 +12,35 @@
   --color-transparent: transparent;
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-muted-foreground: var(--color-white);
   --color-brand: #22c55e;
+  --color-input: var(--color-white);
 
-  --background: var(--color-black);
-  --foreground: var(--color-white);
-  --card: var(--color-black);
-  --card-foreground: var;
-  --popover: var(--color-black);
-  --popover-foreground: var;
-  --primary: 0 0% 9%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 0 0% 96.1%;
-  --secondary-foreground: 0 0% 9%;
-  --muted: 0 0% 96.1%;
-  --muted-foreground: 0 0% 45.1%;
-  --accent: 0 0% 96.1%;
-  --accent-foreground: 0 0% 9%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 0 0% 89.8%;
-  --input: 0 0% 89.8%;
-  --ring: var;
-  --chart-1: 12 76% 61%;
-  --chart-2: 173 58% 39%;
-  --chart-3: 197 37% 24%;
-  --chart-4: 43 74% 66%;
-  --chart-5: 27 87% 67%;
-  --radius: 0.5rem;
+  --color-background: var(--color-black);
+  --color-foreground: var(--color-white);
+  --color-card: var(--color-black);
+  --color-card-foreground: var;
+  --color-popover: var(--color-black);
+  --color-popover-foreground: var;
+  --color-primary: var(--color-black);
+  --color-primary-foreground: 0 0% 98%;
+  --color-secondary: 0 0% 96.1%;
+  --color-secondary-foreground: var(--color-black);
+  --color-muted: 0 0% 96.1%;
+  --color-muted-foreground: var(--color-white);
+  --color-accent: 0 0% 96.1%;
+  --color-accent-foreground: var(--color-black);
+  --color-destructive: 0 84.2% 60.2%;
+  --color-destructive-foreground: 0 0% 98%;
+  --color-border: 0 0% 89.8%;
+
+  --color-ring: var;
+  --color-chart-1: 12 76% 61%;
+  --color-chart-2: 173 58% 39%;
+  --color-chart-3: 197 37% 24%;
+  --color-chart-4: 43 74% 66%;
+  --color-chart-5: 27 87% 67%;
+  --color-radius: 0.5rem;
 }
 
 @layer base {

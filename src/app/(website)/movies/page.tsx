@@ -1,55 +1,55 @@
-import { fetchMoviesByIds } from "@/actions/tmdb";
-import Container from "@/components/ui/container";
-import HeroBanner from "@/components/ui/Heroes/HeroBanner";
-import MovieList from "@/app/movies/_components/MovieList";
-import {
-  fetchMoviesForPagination,
-  getTotalMovieCount,
-} from "@/lib/schemas/movies";
+import Container from '@/components/ui/container'
 
-import React, { Suspense } from "react";
+// import { fetchMoviesForPagination, getTotalMovieCount } from '@/lib/schemas/movies'
 
-import PaginationComponent from "@/components/ui/MainPagination";
+import React, { Suspense } from 'react'
 
-export const revalidate = 0;
+import MovieList from './_components/MovieList'
+import { fetchMoviesByIds } from '@/app/actions/tmdb'
+import HeroBanner from '@/components/Heroes/HeroBanner'
+import PaginationComponent from '@/components/MainPagination'
+import { fetchMoviesForPagination, getTotalMovieCount } from '@/lib/queries'
+
+export const revalidate = 0
 
 export default async function MoviesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string }>
 }) {
-  const params = await searchParams;
-  const LIMIT = 21;
-  const currentPage = Number(params?.page) || 1;
+  const params = await searchParams
+  const LIMIT = 21
+  const currentPage = Number(params?.page) || 1
+
   const movies = await fetchMoviesForPagination({
     limit: String(LIMIT),
     page: String(currentPage),
-  });
+  })
 
-  const totalMovies = await getTotalMovieCount();
+  const totalMovies = await getTotalMovieCount()
 
   const allMovies = await fetchMoviesByIds(
-    movies.map((movie: { movieId?: string | null }) => String(movie.movieId)),
-  );
+    movies.docs.map((movie: { movieId?: string | null }) => String(movie.movieId)),
+  )
+
+  console.log(totalMovies.totalDocs)
 
   return (
     <>
       <Suspense>
         <HeroBanner movie={allMovies} />
         <div className="mt-4 text-center text-lg text-white">
-          Total: (<strong>{totalMovies}</strong>)
+          Total: (<strong>{totalMovies.totalDocs}</strong>)
         </div>
       </Suspense>
 
-      <Suspense>
+      {/* <Suspense>
         <section className="bg-black py-40">
           <Container>
             <MovieList movies={allMovies} />
 
             {movies.length === 0 && (
-              <p className="text-center text-lg text-gray-400">
-                No movies found
-              </p>
+              <p className="text-center text-lg text-gray-400">No movies found</p>
             )}
 
             <div className="mt-8">
@@ -61,7 +61,7 @@ export default async function MoviesPage({
             </div>
           </Container>
         </section>
-      </Suspense>
+      </Suspense> */}
     </>
-  );
+  )
 }
