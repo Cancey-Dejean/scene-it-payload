@@ -29,12 +29,16 @@ export type Scene = {
   sceneImage?: SimpleImage
 }
 
+export type SeenBy = {
+  name: string
+}
+
 export type Movie = {
   id: number
   title?: string
   name?: string
   bannerAlt: SimpleImage
-  has_seen_movie?: string[]
+  seenBy?: SeenBy[]
   original_title?: string
   homepage?: string | null
   release_date?: string
@@ -86,11 +90,26 @@ export type Movie = {
   quotes?: Quote[]
 }
 
-export type MovieDetail = Movie & {
+export type MovieInfo = {
+  id: number
+  backdrop_path: string
+  belongs_to_collection: {
+    backdrop_path: string
+    id: number
+    name: string
+    poster_path: string
+  }
+  budget: number
+  homepage: string
+  original_title: string
+  title?: string
+  poster_path: string
+  overview: string
   genres: Array<{ id: number; name: string }>
   release_date?: string
-  first_air_date?: string
   vote_average: number
+  vote_count: number
+
   runtime?: number
   revenue: number
   tagline?: string

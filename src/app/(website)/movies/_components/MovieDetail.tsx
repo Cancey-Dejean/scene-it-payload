@@ -3,35 +3,11 @@ import { Badge } from '@/components/ui/badge'
 import { Clock, Star, Calendar, Film } from 'lucide-react'
 import { imageBaseUrl } from '@/constants'
 import Container from '@/components/ui/container'
-import { Movie } from '@/types'
+import { Movie, MovieInfo } from '@/types'
 
 type MovieDetailProps = {
   movie: Movie
-  details: {
-    backdrop_path: string
-    belongs_to_collection: {
-      backdrop_path: string
-      id: number
-      name: string
-      poster_path: string
-    }
-    budget: number
-    genres: Array<{ id: number; name: string }>
-    homepage: string
-    id: number
-    original_title: string
-    title?: string
-    popularity: number
-    poster_path: string
-    overview: string
-    name?: string
-    first_air_date?: string
-    vote_average: number
-    vote_count: number
-    release_date?: string
-    runtime?: number
-    tagline?: string
-  }
+  details: MovieInfo
 }
 
 export function MovieDetail({ details, movie }: MovieDetailProps) {
@@ -47,6 +23,8 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
 
   const duration =
     details.runtime && `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`
+
+  console.log(movie)
 
   return (
     <section className="relative h-[600px] w-full">
@@ -111,23 +89,21 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
           <p className="text-lg text-gray-300">{details.overview}</p>
         </div>
 
-        <div>
-          {movie.has_seen_movie && (
-            <div className="text-white">
-              <h3 className="mb-4 mt-6 text-lg font-bold text-green-500">Seen by:</h3>
-              <div className="flex gap-4">
-                {movie.has_seen_movie.map((person: string) => (
-                  <p
-                    className="flex size-10 items-center justify-center rounded-full border"
-                    key={person}
-                  >
-                    {person.charAt(0).toUpperCase()}
-                  </p>
-                ))}
-              </div>
+        {movie.seenBy && (
+          <div className="text-white">
+            <h3 className="mb-4 mt-6 text-lg font-bold text-green-500">Seen by:</h3>
+            <div className="flex gap-4">
+              {movie.seenBy?.map(({ name }) => (
+                <p
+                  className="flex size-10 items-center justify-center rounded-full border"
+                  key={name}
+                >
+                  {name.charAt(0).toUpperCase()}
+                </p>
+              ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </Container>
     </section>
   )

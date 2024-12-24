@@ -1,11 +1,8 @@
-// import FavoriteScenes from "@/app/movies/_components/FavoriteScenes";
 import { fetchMoviesByIds } from '@/app/actions/tmdb'
-
 import { fetchMovies } from '@/lib/queries'
-
 import { Suspense } from 'react'
 import { MovieDetail } from '../_components/MovieDetail'
-import FavoriteScenes from '../_components/FavoriteScenes'
+// import FavoriteScenes from '../_components/FavoriteScenes'
 
 type Props = {
   params: Promise<{ movieId: string }>
@@ -21,9 +18,6 @@ export default async function MovieDetailsPage(props: Props) {
 
   const tmdbMovie = tmdbMovieDetails[0]
   const movie = cmsMovies.docs.find((movie) => movie.movieId === movieId)
-  // const scenes = movieScenes.docs[0]
-
-  // console.log(scenes)
 
   return (
     <>
