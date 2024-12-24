@@ -24,8 +24,6 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
   const duration =
     details.runtime && `${Math.floor(details.runtime / 60)}h ${details.runtime % 60}m`
 
-  console.log(movie)
-
   return (
     <section className="relative h-[600px] w-full">
       <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black via-black/40" />
