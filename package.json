@@ -16,9 +16,9 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@payloadcms/db-mongodb": "^3.11.0",
     "@payloadcms/db-postgres": "3.9.0",
     "@payloadcms/next": "3.9.0",
-    "@payloadcms/payload-cloud": "3.9.0",
     "@payloadcms/richtext-lexical": "3.9.0",
     "@payloadcms/storage-uploadthing": "^3.11.0",
     "@radix-ui/react-slot": "^1.1.1",

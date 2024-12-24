@@ -47,4 +47,8 @@
   body {
     @apply font-inter antialiased bg-black;
   }
+
+  button {
+    @apply cursor-pointer;
+  }
 }

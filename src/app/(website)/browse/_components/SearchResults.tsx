@@ -73,19 +73,16 @@ export default function SearchResults({ results }: SearchResultsProps) {
                   onClick={() => {
                     navigator.clipboard.writeText(result.id.toString())
                     toast.success(
-                      <div className="flex flex-col gap-1">
+                      <div className="flex flex-col gap-1  ">
                         <span className="font-medium">Copied!</span>
-                        <span className="text-sm text-muted-foreground">
-                          ID for{' '}
-                          <strong className="text-black dark:text-white">
-                            {result.title || result.name}
-                          </strong>{' '}
-                          has been copied to your clipboard
+                        <span className="text-sm text-white">
+                          ID for <strong>{result.title || result.name}</strong> has been copied to
+                          your clipboard
                         </span>
                       </div>,
                     )
                   }}
-                  className="absolute bottom-1 right-1 flex size-8 items-center justify-center rounded-sm ring-offset-background transition-all duration-200 ease-in-out hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                  className="absolute bottom-0 right-0 flex size-8 items-center justify-center ring-offset-background transition-all duration-200 ease-in-out hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 hover:text-white/20 border-l border-l-white/20 border-t border-t-white/20 rounded-b-none rounded-r-none"
                 >
                   <CopyIcon className="size-4" />
                 </Button>

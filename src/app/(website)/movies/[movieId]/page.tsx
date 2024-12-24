@@ -1,7 +1,7 @@
 // import FavoriteScenes from "@/app/movies/_components/FavoriteScenes";
 import { fetchMoviesByIds } from '@/app/actions/tmdb'
 
-import { fetchMovies, fetchScenes } from '@/lib/queries'
+import { fetchMovies } from '@/lib/queries'
 
 import { Suspense } from 'react'
 import { MovieDetail } from '../_components/MovieDetail'
@@ -14,15 +14,16 @@ type Props = {
 export default async function MovieDetailsPage(props: Props) {
   const { movieId } = await props.params
 
-  const [tmdbMovieDetails, cmsMovies, movieScenes] = await Promise.all([
+  const [tmdbMovieDetails, cmsMovies] = await Promise.all([
     fetchMoviesByIds([movieId]),
     fetchMovies(),
-    fetchScenes(),
   ])
 
   const tmdbMovie = tmdbMovieDetails[0]
   const movie = cmsMovies.docs.find((movie) => movie.movieId === movieId)
-  const scenes = movieScenes.docs
+  // const scenes = movieScenes.docs[0]
+
+  // console.log(scenes)
 
   return (
     <>
@@ -31,10 +32,7 @@ export default async function MovieDetailsPage(props: Props) {
         <MovieDetail movie={movie} details={tmdbMovie} />
       </Suspense>
 
-      <Suspense>
-        {/* @ts-expect-error TODO: fix this */}
-        <FavoriteScenes scenes={scenes} />
-      </Suspense>
+      <Suspense>{/* <FavoriteScenes /> */}</Suspense>
 
       {/* {movie?.quotes?.length > 0 && (
         <Suspense>

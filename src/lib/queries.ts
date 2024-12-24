@@ -43,13 +43,13 @@ export async function fetchMovies() {
   })
 }
 
-export async function fetchScenes() {
-  const payload = await getPayload({ config })
-  return await payload.find({
-    collection: 'scenes',
-    depth: 2,
-  })
-}
+// export async function fetchScenes() {
+//   const payload = await getPayload({ config })
+//   return await payload.find({
+//     collection: 'scenes',
+//     depth: 2,
+//   })
+// }
 
 export async function fetchTvShows() {
   const payload = await getPayload({ config })

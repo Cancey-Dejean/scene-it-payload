@@ -9,48 +9,35 @@
 export interface Config {
   auth: {
     users: UserAuthOperations;
-    editors: EditorAuthOperations;
   };
   collections: {
     users: User;
     media: Media;
-    editors: Editor;
     movies: Movie;
-    scenes: Scene;
     tvShows: TvShow;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    movies: {
-      relatedScenes: 'scenes';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    editors: EditorsSelect<false> | EditorsSelect<true>;
     movies: MoviesSelect<false> | MoviesSelect<true>;
-    scenes: ScenesSelect<false> | ScenesSelect<true>;
     tvShows: TvShowsSelect<false> | TvShowsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {};
   globalsSelect: {};
   locale: null;
-  user:
-    | (User & {
-        collection: 'users';
-      })
-    | (Editor & {
-        collection: 'editors';
-      });
+  user: User & {
+    collection: 'users';
+  };
   jobs: {
     tasks: unknown;
     workflows: unknown;
@@ -74,30 +61,12 @@ export interface UserAuthOperations {
     password: string;
   };
 }
-export interface EditorAuthOperations {
-  forgotPassword: {
-    email: string;
-    password: string;
-  };
-  login: {
-    email: string;
-    password: string;
-  };
-  registerFirstUser: {
-    email: string;
-    password: string;
-  };
-  unlock: {
-    email: string;
-    password: string;
-  };
-}
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   name: string;
   role: 'admin' | 'editor';
   updatedAt: string;
@@ -116,7 +85,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt: string;
   _key?: string | null;
   updatedAt: string;
@@ -133,50 +102,22 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "editors".
- */
-export interface Editor {
-  id: number;
-  name: string;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "movies".
  */
 export interface Movie {
-  id: number;
+  id: string;
   title: string;
   movieId: string;
-  seenBy?: (number | User)[] | null;
-  bannerAlt?: (number | null) | Media;
-  relatedScenes?: {
-    docs?: (number | Scene)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "scenes".
- */
-export interface Scene {
-  id: number;
-  title: string;
-  sceneStarts?: string | null;
-  sceneEnds?: string | null;
-  sceneImage?: (number | null) | Media;
-  movies?: (number | null) | Movie;
+  seenBy?: (string | User)[] | null;
+  bannerAlt?: (string | null) | Media;
+  scenes?:
+    | {
+        sceneStarts?: string | null;
+        sceneEnds?: string | null;
+        sceneImage?: (string | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -185,11 +126,11 @@ export interface Scene {
  * via the `definition` "tvShows".
  */
 export interface TvShow {
-  id: number;
+  id: string;
   title: string;
   showId: string;
-  seenBy?: (number | User)[] | null;
-  bannerAlt?: (number | null) | Media;
+  seenBy?: (string | User)[] | null;
+  bannerAlt?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -198,42 +139,29 @@ export interface TvShow {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'editors';
-        value: number | Editor;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'movies';
-        value: number | Movie;
-      } | null)
-    | ({
-        relationTo: 'scenes';
-        value: number | Scene;
+        value: string | Movie;
       } | null)
     | ({
         relationTo: 'tvShows';
-        value: number | TvShow;
+        value: string | TvShow;
       } | null);
   globalSlug?: string | null;
-  user:
-    | {
-        relationTo: 'users';
-        value: number | User;
-      }
-    | {
-        relationTo: 'editors';
-        value: number | Editor;
-      };
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -242,16 +170,11 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
-  user:
-    | {
-        relationTo: 'users';
-        value: number | User;
-      }
-    | {
-        relationTo: 'editors';
-        value: number | Editor;
-      };
+  id: string;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
   key?: string | null;
   value?:
     | {
@@ -270,7 +193,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -314,22 +237,6 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "editors_select".
- */
-export interface EditorsSelect<T extends boolean = true> {
-  name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "movies_select".
  */
 export interface MoviesSelect<T extends boolean = true> {
@@ -337,20 +244,14 @@ export interface MoviesSelect<T extends boolean = true> {
   movieId?: T;
   seenBy?: T;
   bannerAlt?: T;
-  relatedScenes?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "scenes_select".
- */
-export interface ScenesSelect<T extends boolean = true> {
-  title?: T;
-  sceneStarts?: T;
-  sceneEnds?: T;
-  sceneImage?: T;
-  movies?: T;
+  scenes?:
+    | T
+    | {
+        sceneStarts?: T;
+        sceneEnds?: T;
+        sceneImage?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

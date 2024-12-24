@@ -1,22 +1,20 @@
-import { cn } from "@/lib/utils";
-import React from "react";
+import { cn } from '@/lib/utils'
+import React from 'react'
 
 const containerSizes = {
-  base: "max-w-[1240px]",
-};
+  base: 'max-w-[1240px]',
+}
 
 export default function Container({
-  size = "base",
+  size = 'base',
   children,
   className,
 }: {
-  size?: keyof typeof containerSizes;
-  className?: string;
-  children: React.ReactNode;
+  size?: keyof typeof containerSizes
+  className?: string
+  children: React.ReactNode
 } & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("mx-auto w-full", containerSizes[size], className)}>
-      {children}
-    </div>
-  );
+    <div className={cn('mx-auto w-full px-5', containerSizes[size], className)}>{children}</div>
+  )
 }

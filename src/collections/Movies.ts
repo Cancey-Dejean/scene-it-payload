@@ -38,11 +38,33 @@ export const Movies: CollectionConfig = {
         update: isAdminFieldLevel,
       },
     },
+    // {
+    //   name: 'relatedScenes',
+    //   type: 'join',
+    //   collection: 'scenes',
+    //   on: 'movies',
+    // },
     {
-      name: 'relatedScenes',
-      type: 'join',
-      collection: 'scenes',
-      on: 'movies',
+      name: 'scenes',
+      type: 'array',
+      fields: [
+        {
+          name: 'sceneStarts',
+          label: 'Scene Starts',
+          type: 'text',
+        },
+        {
+          name: 'sceneEnds',
+          label: 'Scene Ends',
+          type: 'text',
+        },
+        {
+          name: 'sceneImage',
+          label: 'Scene Image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+      ],
     },
   ],
 }

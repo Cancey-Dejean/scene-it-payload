@@ -9,6 +9,7 @@ import { fetchMoviesByIds } from '@/app/actions/tmdb'
 import HeroBanner from '@/components/Heroes/HeroBanner'
 import PaginationComponent from '@/components/MainPagination'
 import { fetchMoviesForPagination, getTotalMovieCount } from '@/lib/queries'
+import AddContent from '@/components/ui/add-content'
 
 export const revalidate = 0
 
@@ -34,32 +35,38 @@ export default async function MoviesPage({
 
   return (
     <>
-      <Suspense>
-        <HeroBanner movie={allMovies} />
-        <div className="mt-4 text-center text-lg text-white">
-          Total: (<strong>{totalMovies.totalDocs}</strong>)
-        </div>
-      </Suspense>
-
-      <section className="bg-black py-40">
-        <Container>
-          <MovieList movies={allMovies} />
-
-          {movies.docs.length === 0 && (
-            <p className="text-center text-lg text-gray-400">No movies found</p>
-          )}
-
-          {totalMovies.totalDocs > LIMIT && (
-            <div className="mt-8">
-              <PaginationComponent
-                limit={LIMIT}
-                currentPage={currentPage}
-                total={Number(totalMovies.totalDocs)}
-              />
+      {totalMovies.totalDocs > 0 ? (
+        <>
+          <Suspense>
+            <HeroBanner movie={allMovies} />
+            <div className="mt-4 text-center text-lg text-white">
+              Total: (<strong>{totalMovies.totalDocs}</strong>)
             </div>
-          )}
-        </Container>
-      </section>
+          </Suspense>
+
+          <section className="bg-black py-40">
+            <Container>
+              <MovieList movies={allMovies} />
+
+              {movies.docs.length === 0 && (
+                <p className="text-center text-lg text-gray-400">No movies found</p>
+              )}
+
+              {totalMovies.totalDocs > LIMIT && (
+                <div className="mt-8">
+                  <PaginationComponent
+                    limit={LIMIT}
+                    currentPage={currentPage}
+                    total={Number(totalMovies.totalDocs)}
+                  />
+                </div>
+              )}
+            </Container>
+          </section>
+        </>
+      ) : (
+        <AddContent title='Add a movie to the "movies" collection in the admin panel.' />
+      )}
     </>
   )
 }
