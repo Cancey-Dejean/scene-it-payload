@@ -37,6 +37,7 @@ export type Movie = {
   id: number
   title?: string
   name?: string
+  movieId?: string
   bannerAlt: SimpleImage
   seenBy?: SeenBy[]
   original_title?: string

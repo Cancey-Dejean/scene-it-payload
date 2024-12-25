@@ -144,6 +144,21 @@ export interface Favorite {
   id: string;
   name?: string | null;
   topTen?: (string | Movie)[] | null;
+  comedy?: (string | Movie)[] | null;
+  action?: (string | Movie)[] | null;
+  drama?: (string | Movie)[] | null;
+  documentary?: (string | Movie)[] | null;
+  war?: (string | Movie)[] | null;
+  martialArts?: (string | Movie)[] | null;
+  christmas?: (string | Movie)[] | null;
+  horror?: (string | Movie)[] | null;
+  thriller?: (string | Movie)[] | null;
+  hoodClassics?: (string | Movie)[] | null;
+  mobb?: (string | Movie)[] | null;
+  sciFi?: (string | Movie)[] | null;
+  western?: (string | Movie)[] | null;
+  eighties?: (string | Movie)[] | null;
+  postApocalyptic?: (string | Movie)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -291,6 +306,21 @@ export interface TvShowsSelect<T extends boolean = true> {
 export interface FavoritesSelect<T extends boolean = true> {
   name?: T;
   topTen?: T;
+  comedy?: T;
+  action?: T;
+  drama?: T;
+  documentary?: T;
+  war?: T;
+  martialArts?: T;
+  christmas?: T;
+  horror?: T;
+  thriller?: T;
+  hoodClassics?: T;
+  mobb?: T;
+  sciFi?: T;
+  western?: T;
+  eighties?: T;
+  postApocalyptic?: T;
   updatedAt?: T;
   createdAt?: T;
 }
