@@ -7,7 +7,31 @@ import { Movie, MovieInfo } from '@/types'
 
 type MovieDetailProps = {
   movie: Movie
-  details: MovieInfo
+  details: {
+    backdrop_path: string
+    belongs_to_collection: {
+      backdrop_path: string
+      id: number
+      name: string
+      poster_path: string
+    }
+    budget: number
+    genres: Array<{ id: number; name: string }>
+    homepage: string
+    id: number
+    original_title: string
+    title?: string
+    popularity: number
+    poster_path: string
+    overview: string
+    name?: string
+    first_air_date?: string
+    vote_average: number
+    vote_count: number
+    release_date?: string
+    runtime?: number
+    tagline?: string
+  }
 }
 
 export function MovieDetail({ details, movie }: MovieDetailProps) {
@@ -53,16 +77,19 @@ export function MovieDetail({ details, movie }: MovieDetailProps) {
       </div>
 
       <Container className="relative z-[2] flex h-full flex-col justify-end pb-10">
-        <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">{title}</h1>
-        {details.tagline && <p className="mb-4 text-xl text-gray-300">{details.tagline}</p>}
+        <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
+          {title || details.original_title}
+        </h1>
 
+        {details.tagline && <p className="mb-4 text-xl text-gray-300">{details.tagline}</p>}
+        {/*
         <div className="mb-6 flex flex-wrap gap-2">
           {details.genres.map((genre) => (
             <Badge key={genre.id} variant="default">
               {genre.name}
             </Badge>
           ))}
-        </div>
+        </div> */}
 
         <div className="flex flex-wrap gap-6 text-gray-300">
           <div className="flex items-center gap-2">

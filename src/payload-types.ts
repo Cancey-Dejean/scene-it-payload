@@ -15,6 +15,7 @@ export interface Config {
     media: Media;
     movies: Movie;
     tvShows: TvShow;
+    favorites: Favorite;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -25,6 +26,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     movies: MoviesSelect<false> | MoviesSelect<true>;
     tvShows: TvShowsSelect<false> | TvShowsSelect<true>;
+    favorites: FavoritesSelect<false> | FavoritesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -136,6 +138,17 @@ export interface TvShow {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "favorites".
+ */
+export interface Favorite {
+  id: string;
+  name?: string | null;
+  topTen?: (string | Movie)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -156,6 +169,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'tvShows';
         value: string | TvShow;
+      } | null)
+    | ({
+        relationTo: 'favorites';
+        value: string | Favorite;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -264,6 +281,16 @@ export interface TvShowsSelect<T extends boolean = true> {
   showId?: T;
   seenBy?: T;
   bannerAlt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "favorites_select".
+ */
+export interface FavoritesSelect<T extends boolean = true> {
+  name?: T;
+  topTen?: T;
   updatedAt?: T;
   createdAt?: T;
 }

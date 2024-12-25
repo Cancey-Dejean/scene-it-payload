@@ -12,6 +12,7 @@ import { Media } from './collections/Media'
 
 import { Movies } from './collections/Movies'
 import { TvShows } from './collections/TvShows'
+import { Favorites } from './collections/Favorites'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Movies, TvShows],
+  collections: [Users, Media, Movies, TvShows, Favorites],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
