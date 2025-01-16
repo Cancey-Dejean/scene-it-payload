@@ -1,6 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useRouter } from 'next/navigation'
@@ -43,6 +43,7 @@ export default function CreateMovie() {
             setMovieId(e.target.value)
           }}
           className="placeholder:text-white/50"
+          required
         />
       </div>
       <div className="flex flex-col gap-2 w-full">
@@ -54,6 +55,7 @@ export default function CreateMovie() {
             setTitle(e.target.value)
           }}
           className="placeholder:text-white/50"
+          required
         />
       </div>
       <Button onClick={handleAddMovie} variant="secondary">

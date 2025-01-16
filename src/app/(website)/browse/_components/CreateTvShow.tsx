@@ -2,9 +2,7 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-
 import { useRouter } from 'next/navigation'
-
 import { useState } from 'react'
 
 export default function CreateTvShow() {
@@ -43,6 +41,7 @@ export default function CreateTvShow() {
             setTitle(e.target.value)
           }}
           className="placeholder:text-white/50"
+          required
         />
       </div>
       <div className="flex flex-col gap-2 w-full">
@@ -54,6 +53,7 @@ export default function CreateTvShow() {
             setShowId(e.target.value)
           }}
           className="placeholder:text-white/50"
+          required
         />
       </div>
       <Button onClick={handleAddTvShow} variant="secondary">
