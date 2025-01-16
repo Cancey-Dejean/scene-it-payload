@@ -1,4 +1,5 @@
 import { isAdminFieldLevel } from '@/lib/access/isAdmin'
+import { isAdminOrEditor } from '@/lib/access/isAdminOrEditor'
 
 import type { CollectionConfig } from 'payload'
 
@@ -6,6 +7,9 @@ export const TvShows: CollectionConfig = {
   slug: 'tvShows',
   admin: {
     useAsTitle: 'title',
+  },
+  access: {
+    create: isAdminOrEditor,
   },
   fields: [
     {

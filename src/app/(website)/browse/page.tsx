@@ -8,9 +8,13 @@ import SearchResults from './_components/SearchResults'
 import SearchBar from './_components/SearchBar'
 import { SearchResult, TMDBError } from '@/types'
 
+import { Label } from '@/components/ui/label'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Container from '@/components/ui/container'
 import { searchTMDB } from '@/app/actions/tmdb'
 import { Spinner } from '@/components/ui/icons'
+import CreateMovie from './_components/CreateMovie'
+import CreateTvShow from './_components/CreateTvShow'
 
 export default function BrowsePage() {
   const [query, setQuery] = useState('')
@@ -74,6 +78,29 @@ export default function BrowsePage() {
         ) : query && !isLoading ? (
           <div className="text-center text-muted-foreground">No results found</div>
         ) : null}
+      </Container>
+
+      <Container className="text-white ">
+        <div className="mx-auto mb-8 max-w-3xl">
+          <Tabs defaultValue="movie" className="min-w-[400px] ">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="movie">Create Movie</TabsTrigger>
+              <TabsTrigger value="tv">Create TV Show</TabsTrigger>
+            </TabsList>
+            <TabsContent value="movie">
+              <Card className="p-6">
+                <h1 className="mb-4 text-4xl font-bold">Add a Movie</h1>
+                <CreateMovie />
+              </Card>
+            </TabsContent>
+            <TabsContent value="tv">
+              <Card className="p-6">
+                <h2 className="mb-4 text-4xl font-bold">Add a TV Show</h2>
+                <CreateTvShow />
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
       </Container>
     </section>
   )
